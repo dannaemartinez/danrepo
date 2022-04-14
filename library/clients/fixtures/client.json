@@ -1,0 +1,20 @@
+[
+    {
+      "model": "clients.Client",
+      "pk": 1,
+      "fields": {
+        "name": "Dannae",
+        "last_name": "Mar",
+        "email": "dann@gmail.com"
+      }
+    },
+    {
+        "model": "clients.Client",
+        "pk": 2,
+        "fields": {
+          "name": "Carlos",
+          "last_name": "Lopez",
+          "email": "fhergu@gmail.com"
+        }
+      }  
+  ]
