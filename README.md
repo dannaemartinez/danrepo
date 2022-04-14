@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/dannaemartinez/danrepo.svg?branch=main)](https://app.travis-ci.com/dannaemartinez/danrepo)
+
 # Django-and-Django-REST-Framework
 
 ## Setup
