@@ -1,4 +1,7 @@
-from django.contrib.auth.models import User, Group
+#from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+# Changes
+from library.users.models import User
 from rest_framework import viewsets
 from rest_framework.generics import GenericAPIView
 from rest_framework.views import APIView
@@ -6,7 +9,6 @@ from rest_framework import permissions
 from library.users.serializers import UserSerializer, GroupSerializer, RefreshTokenSerializer
 from rest_framework.response import Response
 from rest_framework import status
-
 
 class LoginView(APIView):
     def post(self, request):
@@ -21,11 +23,11 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password!')
 
-        response = Response()
-
         response.data = {
             'id': user.id,
-            'email': user.email
+            'email': user.email,
+            #changes
+            'type': user.type
         }
         return response
 

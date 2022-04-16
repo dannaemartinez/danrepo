@@ -9,5 +9,6 @@ router.register(r'booksauthor', views.BooksAuthorsViewSet)
 router.register(r'', views.BookViewSet)
 
 urlpatterns = [
+	#path('thing', views.ThingView.as_view()),
 	path('', include(router.urls)),
 ]

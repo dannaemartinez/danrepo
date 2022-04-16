@@ -1,5 +1,7 @@
-from django.contrib.auth.models import User, Group
+#from django.contrib.auth.models import User, Group
 # from library.users.models import User
+from django.contrib.auth.models import Group
+from library.users.models import User
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from rest_framework.generics import GenericAPIView
@@ -34,7 +36,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'groups']
+        fields = ['id', 'username', 'password', 'email', 'type', 'groups']
+         # Changes password to write only, user never be able to access it
+        extra_kwargs = {
+            'email': {'required': True},
+            'password': {'write_only': True},
+        }
 
 
 class GroupSerializer(serializers.ModelSerializer):
