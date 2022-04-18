@@ -1,10 +1,12 @@
 import pytest
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 @pytest.mark.django_db
 def test_user_create():
-	user = User.objects.create_user('test', 'test@test.com', 'test')
+	user = User.objects.create(username='test', email='test@test.com', type=User.Type.BUYER)
 	count = User.objects.all().count()
 	print(count)
 	assert User.objects.count() == 1
