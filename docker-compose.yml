@@ -18,6 +18,19 @@ services:
       - our-library-net
     command: "-p 55${PORT}"
 
+  redis_service06:
+    image: redis:7-alpine
+    container_name: "redis${PORT}"
+    environment:
+      - "SOME_REDIS_ENV=whatever"
+    command: "--port 63${PORT}"
+    ports:
+      - "120${PORT}:63${PORT}"
+    volumes: 
+      - "${REDIS_VOLUME_PATH}:/usr/local/etc/redis"
+    networks:
+      - our-library-net
+
   web06:
     build: .
     image: my-django-image06:2.0.0
@@ -27,6 +40,7 @@ services:
     container_name: "django${PORT}"
     depends_on: 
       - postgres_db06
+      - redis_service06
     environment:
       - "PSQL_DBNAME=${PSQL_DB}"
       - "PSQL_USERNAME=${PSQL_USER}"
@@ -34,6 +48,8 @@ services:
       - "PSQL_HOST=postgres_db${PORT}" # You must use the previous command in order to get this HOST
       - "PSQL_PORT=55${PORT}"
       - "JWT_TOKEN_TIME=${JWT_TOKEN_TIME}"
+      - "REDIS_HOST=redis_service${PORT}"
+      - "REDIS_PORT=63${PORT}"
     volumes:
     # "RUTA/DEL/SERVIDOR:RUTA/DENTRO/DEL/CONTENEDOR"
       #- "/home/dannae_martinez/django/Django-REST-Exercise:/usr/src/django/library"
